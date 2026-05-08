@@ -1,0 +1,38 @@
+---
+const navLinks = [
+  { href: "/", label: "home" },
+  { href: "/projects", label: "projects" },
+  { href: "/blog", label: "blog" },
+  { href: "/about", label: "about" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="border-b border-[var(--color-border)]">
+  <nav class="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="text-[var(--color-function)] font-bold hover:text-[var(--color-variable)] transition-colors">
+      dylan
+    </a>
+    <ul class="flex gap-6 text-sm">
+      {navLinks.map(({ href, label }) => {
+        const isActive = currentPath === href || (href !== "/" && currentPath.startsWith(href));
+        return (
+          <li>
+            <a
+              href={href}
+              class:list={[
+                "transition-colors",
+                isActive
+                  ? "text-[var(--color-keyword)]"
+                  : "text-[var(--color-punctuation)] hover:text-[var(--color-operator)]",
+              ]}
+            >
+              {label}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,350 @@
+---
+interface Props {
+  repo: string; // e.g. "DylanCoon99/chip_emulator"
+}
+
+const { repo } = Astro.props;
+---
+
+<div
+  class="code-viewer mt-12 rounded border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden"
+  data-repo={repo}
+>
+  <!-- Header -->
+  <div class="flex items-center justify-between px-4 py-2 border-b border-[var(--color-border)] bg-[var(--color-surface-hover)]">
+    <span class="text-xs text-[var(--color-comment)]">
+      <span class="text-[var(--color-punctuation)]">// </span>source code
+    </span>
+    <a
+      href={`https://github.com/${repo}`}
+      target="_blank"
+      rel="noopener"
+      class="text-xs text-[var(--color-constant)] hover:underline"
+    >
+      view on github
+    </a>
+  </div>
+
+  <!-- Body: tree + code -->
+  <div class="flex flex-col md:flex-row" style="min-height: 400px; max-height: 600px;">
+    <!-- File tree -->
+    <div class="cv-tree md:w-60 shrink-0 border-b md:border-b-0 md:border-r border-[var(--color-border)] overflow-auto p-3 text-xs" style="max-height: 200px; md:max-height: none;">
+      <div class="cv-tree-loading text-[var(--color-punctuation)]">loading file tree...</div>
+      <ul class="cv-tree-root hidden"></ul>
+    </div>
+
+    <!-- Code panel -->
+    <div class="cv-code flex-1 overflow-auto">
+      <div class="cv-code-empty flex items-center justify-center h-full text-xs text-[var(--color-punctuation)] p-8">
+        select a file to view its contents
+      </div>
+      <div class="cv-code-loading hidden flex items-center justify-center h-full text-xs text-[var(--color-punctuation)] p-8">
+        loading...
+      </div>
+      <div class="cv-code-content hidden"></div>
+      <div class="cv-code-error hidden flex items-center justify-center h-full text-xs text-[var(--color-error)] p-8"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cv-tree ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .cv-tree ul ul {
+    padding-left: 1em;
+  }
+
+  .cv-tree li {
+    line-height: 1.8;
+  }
+
+  .cv-tree .cv-folder > span,
+  .cv-tree .cv-file > span {
+    cursor: pointer;
+    padding: 1px 4px;
+    border-radius: 3px;
+    transition: background-color 0.1s;
+  }
+
+  .cv-tree .cv-folder > span:hover,
+  .cv-tree .cv-file > span:hover {
+    background-color: var(--color-surface-hover);
+  }
+
+  .cv-tree .cv-folder > span {
+    color: var(--color-keyword);
+  }
+
+  .cv-tree .cv-file > span {
+    color: var(--color-operator);
+  }
+
+  .cv-tree .cv-file.active > span {
+    background-color: var(--color-selection);
+    color: var(--color-variable);
+  }
+
+  .cv-tree .cv-folder > ul {
+    display: none;
+  }
+
+  .cv-tree .cv-folder.open > ul {
+    display: block;
+  }
+
+  .cv-code-content :global(pre) {
+    margin: 0;
+    padding: 1em;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    background: transparent !important;
+  }
+
+  .cv-code-content :global(code) {
+    background: none !important;
+    padding: 0;
+  }
+
+  /* File path bar */
+  .cv-code-path {
+    padding: 0.4em 1em;
+    font-size: 0.7rem;
+    color: var(--color-punctuation);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface-hover);
+  }
+
+  @media (min-width: 768px) {
+    .cv-tree {
+      max-height: none !important;
+      height: auto;
+    }
+  }
+</style>
+
+<script>
+  import { createHighlighter } from "shiki";
+
+  const BINARY_EXTENSIONS = new Set([
+    ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".ico", ".svg",
+    ".woff", ".woff2", ".ttf", ".eot",
+    ".zip", ".tar", ".gz", ".rar",
+    ".pdf", ".exe", ".dll", ".so", ".dylib",
+    ".o", ".obj", ".bin", ".dat",
+    ".mp3", ".mp4", ".wav", ".avi",
+  ]);
+
+  const EXT_TO_LANG: Record<string, string> = {
+    ".js": "javascript", ".jsx": "jsx", ".ts": "typescript", ".tsx": "tsx",
+    ".py": "python", ".go": "go", ".rs": "rust",
+    ".c": "c", ".h": "c", ".cpp": "cpp", ".hpp": "cpp", ".cc": "cpp",
+    ".java": "java", ".rb": "ruby", ".php": "php",
+    ".html": "html", ".css": "css", ".scss": "scss",
+    ".json": "json", ".yaml": "yaml", ".yml": "yaml", ".toml": "toml",
+    ".md": "markdown", ".sh": "bash", ".bash": "bash", ".zsh": "bash",
+    ".sql": "sql", ".xml": "xml",
+    ".dockerfile": "dockerfile",
+    ".makefile": "makefile",
+  };
+
+  function getLanguage(filename: string): string {
+    const lower = filename.toLowerCase();
+    if (lower === "makefile" || lower === "gnumakefile") return "makefile";
+    if (lower === "dockerfile") return "dockerfile";
+    const ext = lower.substring(lower.lastIndexOf("."));
+    return EXT_TO_LANG[ext] || "text";
+  }
+
+  function isBinary(path: string): boolean {
+    const ext = path.toLowerCase().substring(path.lastIndexOf("."));
+    return BINARY_EXTENSIONS.has(ext);
+  }
+
+  interface TreeNode {
+    name: string;
+    path: string;
+    type: "tree" | "blob";
+    children?: TreeNode[];
+  }
+
+  function buildTree(items: { path: string; type: string }[]): TreeNode[] {
+    const root: TreeNode[] = [];
+    const dirs = new Map<string, TreeNode>();
+
+    for (const item of items) {
+      const parts = item.path.split("/");
+      let currentChildren = root;
+
+      for (let i = 0; i < parts.length; i++) {
+        const partPath = parts.slice(0, i + 1).join("/");
+        const isLast = i === parts.length - 1;
+
+        if (isLast && item.type === "blob") {
+          currentChildren.push({
+            name: parts[i],
+            path: item.path,
+            type: "blob",
+          });
+        } else {
+          let dir = dirs.get(partPath);
+          if (!dir) {
+            dir = {
+              name: parts[i],
+              path: partPath,
+              type: "tree",
+              children: [],
+            };
+            dirs.set(partPath, dir);
+            currentChildren.push(dir);
+          }
+          currentChildren = dir.children!;
+        }
+      }
+    }
+
+    function sortNodes(nodes: TreeNode[]) {
+      nodes.sort((a, b) => {
+        if (a.type !== b.type) return a.type === "tree" ? -1 : 1;
+        return a.name.localeCompare(b.name);
+      });
+      for (const node of nodes) {
+        if (node.children) sortNodes(node.children);
+      }
+    }
+
+    sortNodes(root);
+    return root;
+  }
+
+  function renderTree(nodes: TreeNode[], ul: HTMLUListElement, onFileClick: (path: string, li: HTMLLIElement) => void) {
+    for (const node of nodes) {
+      const li = document.createElement("li");
+
+      if (node.type === "tree") {
+        li.className = "cv-folder";
+        const span = document.createElement("span");
+        span.textContent = `▸ ${node.name}`;
+        li.appendChild(span);
+
+        const childUl = document.createElement("ul");
+        renderTree(node.children || [], childUl, onFileClick);
+        li.appendChild(childUl);
+
+        span.addEventListener("click", () => {
+          li.classList.toggle("open");
+          span.textContent = li.classList.contains("open")
+            ? `▾ ${node.name}`
+            : `▸ ${node.name}`;
+        });
+      } else {
+        li.className = "cv-file";
+        li.dataset.path = node.path;
+        const span = document.createElement("span");
+        span.textContent = node.name;
+        li.appendChild(span);
+        span.addEventListener("click", () => onFileClick(node.path, li));
+      }
+
+      ul.appendChild(li);
+    }
+  }
+
+  let highlighterPromise: ReturnType<typeof createHighlighter> | null = null;
+
+  function getHighlighter() {
+    if (!highlighterPromise) {
+      highlighterPromise = createHighlighter({
+        themes: ["github-dark"],
+        langs: [...new Set(Object.values(EXT_TO_LANG))],
+      });
+    }
+    return highlighterPromise;
+  }
+
+  async function highlight(code: string, lang: string): Promise<string> {
+    try {
+      const highlighter = await getHighlighter();
+      return highlighter.codeToHtml(code, { lang, theme: "github-dark" });
+    } catch {
+      const escaped = code.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      return `<pre><code>${escaped}</code></pre>`;
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>(".code-viewer").forEach(async (viewer) => {
+    const repo = viewer.dataset.repo;
+    if (!repo) return;
+
+    const treeLoading = viewer.querySelector(".cv-tree-loading") as HTMLElement;
+    const treeRoot = viewer.querySelector(".cv-tree-root") as HTMLUListElement;
+    const codeEmpty = viewer.querySelector(".cv-code-empty") as HTMLElement;
+    const codeLoading = viewer.querySelector(".cv-code-loading") as HTMLElement;
+    const codeContent = viewer.querySelector(".cv-code-content") as HTMLElement;
+    const codeError = viewer.querySelector(".cv-code-error") as HTMLElement;
+
+    function showCodeState(state: "empty" | "loading" | "content" | "error", message?: string) {
+      codeEmpty.classList.toggle("hidden", state !== "empty");
+      codeLoading.classList.toggle("hidden", state !== "loading");
+      codeContent.classList.toggle("hidden", state !== "content");
+      codeError.classList.toggle("hidden", state !== "error");
+      if (state === "error" && message) codeError.textContent = message;
+    }
+
+    let activeFile: HTMLLIElement | null = null;
+
+    async function loadFile(path: string, li: HTMLLIElement) {
+      if (activeFile) activeFile.classList.remove("active");
+      li.classList.add("active");
+      activeFile = li;
+
+      if (isBinary(path)) {
+        showCodeState("error", "binary file — cannot display");
+        return;
+      }
+
+      showCodeState("loading");
+
+      try {
+        const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        if (data.size > 100_000) {
+          showCodeState("error", "file too large to display (> 100KB)");
+          return;
+        }
+
+        const content = atob(data.content);
+        const lang = getLanguage(path);
+        const html = await highlight(content, lang);
+
+        codeContent.innerHTML = `<div class="cv-code-path">${path}</div>${html}`;
+        showCodeState("content");
+      } catch (err) {
+        showCodeState("error", `failed to load file: ${err}`);
+      }
+    }
+
+    // Load tree
+    try {
+      // Try main branch first, fall back to master
+      let res = await fetch(`https://api.github.com/repos/${repo}/git/trees/main?recursive=1`);
+      if (!res.ok) {
+        res = await fetch(`https://api.github.com/repos/${repo}/git/trees/master?recursive=1`);
+      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      const data = await res.json();
+      const tree = buildTree(data.tree.filter((t: { type: string }) => t.type === "blob" || t.type === "tree"));
+
+      treeLoading.classList.add("hidden");
+      treeRoot.classList.remove("hidden");
+      renderTree(tree, treeRoot, loadFile);
+    } catch (err) {
+      treeLoading.textContent = `failed to load: ${err}`;
+    }
+  });
+</script>

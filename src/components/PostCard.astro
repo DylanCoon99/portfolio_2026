@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  slug: string;
+}
+
+const { title, description, date, slug } = Astro.props;
+const formattedDate = date.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+---
+
+<a
+  href={`/blog/${slug}`}
+  class="group block rounded border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition-all hover:border-[var(--color-keyword)]"
+>
+  <p class="text-xs text-[var(--color-number)] mb-2">{formattedDate}</p>
+  <h3 class="text-[var(--color-function)] font-semibold mb-2 group-hover:text-[var(--color-variable)] transition-colors">
+    {title}
+  </h3>
+  <p class="text-xs text-[var(--color-comment)] leading-relaxed">
+    <span class="text-[var(--color-punctuation)]">// </span>{description}
+  </p>
+</a>

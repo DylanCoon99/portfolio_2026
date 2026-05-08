@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import PostCard from "../components/PostCard.astro";
+import { getCollection } from "astro:content";
+
+const allProjects = await getCollection("projects");
+const featuredProjects = allProjects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 4);
+
+const allPosts = await getCollection("blog");
+const recentPosts = allPosts
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+---
+
+<BaseLayout title="Dylan — Electronics, Code & Projects">
+  <!-- Hero -->
+  <section class="max-w-5xl mx-auto px-6 py-24 sm:py-32">
+    <p class="text-sm text-[var(--color-accent)] font-medium mb-4">Hey, I'm Dylan</p>
+    <h1 class="text-4xl sm:text-5xl font-bold leading-tight mb-6">
+      I build things with<br />
+      <span class="text-[var(--color-accent)]">circuits & code.</span>
+    </h1>
+    <p class="text-lg text-[var(--color-text-muted)] max-w-2xl mb-8">
+      Electronics tinkerer and software developer. I share my breadboard builds,
+      PCB designs, and programming projects here.
+    </p>
+    <div class="flex gap-4">
+      <a
+        href="/projects"
+        class="inline-flex items-center px-5 py-2.5 rounded-lg bg-[var(--color-accent)] text-white font-medium text-sm hover:bg-[var(--color-accent-hover)] transition-colors"
+      >
+        View Projects
+      </a>
+      <a
+        href="/about"
+        class="inline-flex items-center px-5 py-2.5 rounded-lg border border-[var(--color-border)] text-sm font-medium hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+      >
+        About Me
+      </a>
+    </div>
+  </section>
+
+  <!-- Featured Projects -->
+  {featuredProjects.length > 0 && (
+    <section class="max-w-5xl mx-auto px-6 pb-20">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-2xl font-bold">Featured Projects</h2>
+        <a href="/projects" class="text-sm text-[var(--color-accent)] hover:underline">
+          View all &rarr;
+        </a>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-6">
+        {featuredProjects.map((project) => (
+          <ProjectCard
+            title={project.data.title}
+            description={project.data.description}
+            tags={project.data.tags}
+            slug={project.id}
+            image={project.data.image}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Recent Blog Posts -->
+  {recentPosts.length > 0 && (
+    <section class="max-w-5xl mx-auto px-6 pb-24">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-2xl font-bold">Recent Posts</h2>
+        <a href="/blog" class="text-sm text-[var(--color-accent)] hover:underline">
+          View all &rarr;
+        </a>
+      </div>
+      <div class="grid sm:grid-cols-3 gap-6">
+        {recentPosts.map((post) => (
+          <PostCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.date}
+            slug={post.id}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+</BaseLayout>

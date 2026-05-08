@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+
+<BaseLayout title="Blog — Dylan" description="Tutorials, build logs, and thoughts on electronics and code.">
+  <section class="max-w-5xl mx-auto px-6 py-16">
+    <h1 class="text-3xl sm:text-4xl font-bold mb-4">Blog</h1>
+    <p class="text-[var(--color-text-muted)] mb-12 max-w-2xl">
+      Tutorials, build logs, and thoughts on electronics and programming.
+    </p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {posts.map((post) => (
+        <PostCard
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date}
+          slug={post.id}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

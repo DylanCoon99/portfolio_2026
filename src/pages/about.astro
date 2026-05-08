@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TagList from "../components/TagList.astro";
+---
+
+<BaseLayout title="About — Dylan" description="About me, my skills, and what I'm working on.">
+  <div class="max-w-3xl mx-auto px-6 py-12">
+    <p class="text-xs text-[var(--color-punctuation)] mb-6">
+      ~/portfolio/<span class="text-[var(--color-string)]">about</span>
+    </p>
+
+    <h1 class="text-2xl font-bold text-[var(--color-function)] mb-3">About Me</h1>
+    <p class="text-sm text-[var(--color-comment)] mb-10">
+      <span class="text-[var(--color-punctuation)]">// </span>Electronics hobbyist & software developer
+    </p>
+
+    <div class="prose mb-12">
+      <p>
+        I'm Dylan — I love building things from the ground up. Whether it's a custom PCB,
+        a sensor network, or a full-stack app, I enjoy the process of turning an idea into
+        something tangible.
+      </p>
+
+      <p>
+        On the hardware side, I work with microcontrollers (Arduino, ESP32, Raspberry Pi),
+        design PCBs in KiCad, and prototype on breadboards. On the software side, I write
+        firmware in C/C++, build tools in Python, and develop web applications.
+      </p>
+    </div>
+
+    <div class="mb-12">
+      <h2 class="text-sm text-[var(--color-comment)] mb-4">
+        <span class="text-[var(--color-punctuation)]">// </span>skills
+      </h2>
+      <div class="space-y-3 text-sm">
+        <div>
+          <span class="text-[var(--color-keyword)]">electronics</span>
+          <span class="text-[var(--color-punctuation)]"> — </span>
+          <span class="text-[var(--color-string)]">Circuit design, PCB layout (KiCad), soldering, oscilloscope debugging</span>
+        </div>
+        <div>
+          <span class="text-[var(--color-keyword)]">microcontrollers</span>
+          <span class="text-[var(--color-punctuation)]"> — </span>
+          <span class="text-[var(--color-string)]">Arduino, ESP32, STM32, Raspberry Pi</span>
+        </div>
+        <div>
+          <span class="text-[var(--color-keyword)]">languages</span>
+          <span class="text-[var(--color-punctuation)]"> — </span>
+          <span class="text-[var(--color-string)]">C/C++, Python, TypeScript, Rust</span>
+        </div>
+        <div>
+          <span class="text-[var(--color-keyword)]">tools</span>
+          <span class="text-[var(--color-punctuation)]"> — </span>
+          <span class="text-[var(--color-string)]">Git, PlatformIO, Docker, Linux</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-12">
+      <h2 class="text-sm text-[var(--color-comment)] mb-4">
+        <span class="text-[var(--color-punctuation)]">// </span>this site
+      </h2>
+      <p class="text-sm text-[var(--color-operator)]">
+        Built with <a href="https://astro.build" class="text-[var(--color-constant)] hover:underline">Astro</a> and
+        <a href="https://tailwindcss.com" class="text-[var(--color-constant)] hover:underline">Tailwind CSS</a>.
+        Deployed on Cloudflare Pages. Content authored in Markdown.
+      </p>
+    </div>
+
+    <div class="flex gap-3">
+      <a
+        href="https://github.com"
+        target="_blank"
+        rel="noopener"
+        class="px-4 py-2 rounded text-sm border border-[var(--color-border)] text-[var(--color-punctuation)] hover:border-[var(--color-keyword)] hover:text-[var(--color-keyword)] transition-colors"
+      >
+        github
+      </a>
+      <a
+        href="mailto:hello@example.com"
+        class="px-4 py-2 rounded text-sm border border-[var(--color-border)] text-[var(--color-punctuation)] hover:border-[var(--color-keyword)] hover:text-[var(--color-keyword)] transition-colors"
+      >
+        email
+      </a>
+    </div>
+  </div>
+</BaseLayout>

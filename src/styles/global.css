@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@theme {
+  /* VS Code Dark+ inspired palette */
+  --color-bg: #1e1e1e;
+  --color-surface: #252526;
+  --color-surface-hover: #2d2d2d;
+  --color-border: #3c3c3c;
+  --color-selection: #264f78;
+
+  /* Syntax colors */
+  --color-keyword: #569cd6;       /* blue — keywords, nav links */
+  --color-string: #ce9178;        /* orange — strings, descriptions */
+  --color-function: #dcdcaa;      /* yellow — function names, headings */
+  --color-variable: #9cdcfe;      /* light blue — variables, names */
+  --color-type: #4ec9b0;          /* teal — types, tags */
+  --color-comment: #6a9955;       /* green — comments, muted text */
+  --color-number: #b5cea8;        /* light green — numbers, dates */
+  --color-constant: #4fc1ff;      /* bright blue — constants, links */
+  --color-operator: #d4d4d4;      /* light gray — main text */
+  --color-punctuation: #808080;   /* gray — punctuation, secondary */
+  --color-class: #c586c0;         /* purple — special/class names */
+  --color-error: #f44747;         /* red — errors */
+
+  --font-mono: "Cascadia Code", "Fira Code", "JetBrains Mono", "SF Mono", Consolas, monospace;
+  --font-sans: var(--font-mono);
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-operator);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--color-selection);
+}
+
+/* Prose styles for markdown content */
+.prose {
+  max-width: 80ch;
+  line-height: 1.7;
+}
+
+.prose h1, .prose h2, .prose h3 {
+  color: var(--color-function);
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+}
+
+.prose h1 { font-size: 1.5rem; }
+.prose h2 { font-size: 1.25rem; }
+.prose h3 { font-size: 1.1rem; }
+
+.prose p {
+  margin-bottom: 1.25em;
+  color: var(--color-operator);
+}
+
+.prose strong {
+  color: var(--color-keyword);
+}
+
+.prose em {
+  color: var(--color-comment);
+  font-style: italic;
+}
+
+.prose a {
+  color: var(--color-constant);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose a:hover {
+  color: var(--color-variable);
+}
+
+.prose img {
+  border-radius: 4px;
+  margin: 1.5em 0;
+  border: 1px solid var(--color-border);
+}
+
+.prose ul, .prose ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.25em;
+  color: var(--color-operator);
+}
+
+.prose li {
+  margin-bottom: 0.5em;
+}
+
+.prose li::marker {
+  color: var(--color-punctuation);
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--color-comment);
+  padding-left: 1em;
+  color: var(--color-comment);
+  font-style: italic;
+  margin: 1.5em 0;
+}
+
+.prose code {
+  background: var(--color-surface);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  font-size: 0.95em;
+  color: var(--color-string);
+}
+
+.prose pre {
+  background: var(--color-panel) !important;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 1em;
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+  color: var(--color-operator);
+}
+

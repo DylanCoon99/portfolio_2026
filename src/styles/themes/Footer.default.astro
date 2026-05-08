@@ -1,0 +1,13 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--color-border)] mt-auto">
+  <div class="max-w-5xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--color-text-muted)]">
+    <p>&copy; {year} Dylan. All rights reserved.</p>
+    <div class="flex gap-5">
+      <a href="/rss.xml" class="hover:text-[var(--color-accent)] transition-colors">RSS</a>
+      <a href="https://github.com" class="hover:text-[var(--color-accent)] transition-colors" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
