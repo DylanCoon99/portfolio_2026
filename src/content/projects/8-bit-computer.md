@@ -3,7 +3,7 @@ title: "8-Bit Breadboard Computer Assembler"
 description: "Custom assembler that compiles assembly source code into binary ROM images for a homebrew 8-bit breadboard computer."
 date: 2025-06-01
 tags: ["python", "assembly", "low-level", "hardware"]
-github: "DylanCoon99/8_bit_computer"
+github: "DylanCoon99/assembler"
 featured: true
 ---
 
@@ -17,4 +17,4 @@ The computer supports 16 instructions including load/store operations, arithmeti
 
 ## Links
 
-- [GitHub](https://github.com/DylanCoon99/8_bit_computer)
+- [GitHub](https://github.com/DylanCoon99/assembler)
