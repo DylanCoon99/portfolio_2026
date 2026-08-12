@@ -42,30 +42,14 @@ html {
   background-clip: text;
 }
 
-/* Glow card effect */
+/* Card hover effect */
 .glow-card {
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-.glow-card::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, transparent 40%, var(--color-accent) 50%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: -1;
-}
-
-.glow-card:hover::before {
-  opacity: 1;
+  transition: all 0.2s ease;
 }
 
 .glow-card:hover {
-  box-shadow: 0 0 30px var(--color-accent-glow), 0 0 60px var(--color-accent-glow);
-  transform: translateY(-2px);
+  border-color: var(--color-border-hover);
+  background-color: var(--color-surface-hover);
 }
 
 /* Animated gradient border for featured elements */
