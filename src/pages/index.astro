@@ -11,40 +11,48 @@ const featuredProjects = allProjects
 ---
 
 <BaseLayout title="Dylan Coon — Software Engineer">
-  <div class="max-w-5xl mx-auto px-6 py-20">
+  <div class="max-w-5xl mx-auto px-6">
     <!-- Hero -->
-    <section class="mb-24">
-      <h1 class="text-4xl sm:text-5xl font-bold text-[var(--color-text)] mb-5 tracking-tight">
-        Hey, I'm <span class="text-[var(--color-accent)]">Dylan</span>.
+    <section class="py-24 sm:py-32 relative">
+      <!-- Gradient orb behind hero -->
+      <div class="absolute -top-20 -left-20 w-72 h-72 bg-[var(--color-accent)]/8 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-10 right-0 w-56 h-56 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+      <p class="text-sm font-medium text-[var(--color-accent)] mb-4 tracking-wide uppercase">Software Engineer</p>
+      <h1 class="text-4xl sm:text-6xl font-bold text-[var(--color-text)] mb-6 tracking-tight leading-[1.1]">
+        Hey, I'm <span class="gradient-text">Dylan</span>.
       </h1>
-      <p class="text-lg text-[var(--color-text-secondary)] mb-8 max-w-xl leading-relaxed">
-        Software engineer focused on backend systems, machine learning infrastructure, and building tools that solve real problems.
+      <p class="text-lg sm:text-xl text-[var(--color-text-secondary)] mb-10 max-w-xl leading-relaxed">
+        I build backend systems, machine learning infrastructure, and tools that solve real problems.
       </p>
-      <div class="flex gap-3">
+      <div class="flex gap-4">
         <a
           href="/projects"
-          class="px-5 py-2.5 rounded-lg text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-light)] transition-colors"
+          class="px-6 py-3 rounded-lg text-sm font-medium bg-[var(--color-accent)] text-white hover:shadow-[0_0_25px_var(--color-accent-glow)] hover:bg-[var(--color-accent-light)] transition-all"
         >
           View Projects
         </a>
         <a
           href="/about"
-          class="px-5 py-2.5 rounded-lg text-sm font-medium border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text)] transition-colors"
+          class="px-6 py-3 rounded-lg text-sm font-medium border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent)]/40 hover:text-[var(--color-text)] transition-all"
         >
           About Me
         </a>
       </div>
     </section>
 
+    <!-- Divider -->
+    <div class="h-px bg-gradient-to-r from-transparent via-[var(--color-accent)]/30 to-transparent mb-16"></div>
+
     <!-- Featured Projects -->
     {featuredProjects.length > 0 && (
-      <section>
-        <div class="flex items-center justify-between mb-8">
-          <h2 class="text-xl font-semibold text-[var(--color-text)]">
+      <section class="pb-20">
+        <div class="flex items-center justify-between mb-10">
+          <h2 class="text-2xl font-semibold text-[var(--color-text)] tracking-tight">
             Featured Projects
           </h2>
-          <a href="/projects" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-light)] transition-colors">
-            View all &rarr;
+          <a href="/projects" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-light)] transition-colors group">
+            View all <span class="inline-block group-hover:translate-x-0.5 transition-transform">&rarr;</span>
           </a>
         </div>
         <div class="grid sm:grid-cols-2 gap-5">

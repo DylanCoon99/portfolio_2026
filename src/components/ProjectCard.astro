@@ -14,7 +14,7 @@ const { title, description, tags, slug, image } = Astro.props;
 
 <a
   href={`/projects/${slug}`}
-  class="group block rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden transition-all hover:border-[var(--color-border-hover)] hover:bg-[var(--color-surface-hover)]"
+  class="glow-card group block rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden"
 >
   {image && (
     <img

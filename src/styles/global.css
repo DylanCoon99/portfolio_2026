@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0b0f1a;
-  --color-surface: #111827;
-  --color-surface-hover: #1a2332;
-  --color-border: #1e293b;
-  --color-border-hover: #334155;
+  --color-bg: #06080f;
+  --color-surface: #0d1117;
+  --color-surface-hover: #151d2b;
+  --color-border: #1a2332;
+  --color-border-hover: #2d3f56;
   --color-selection: #1d4ed8;
 
   --color-accent: #3b82f6;
   --color-accent-light: #60a5fa;
   --color-accent-muted: #1e3a5f;
+  --color-accent-glow: #3b82f620;
 
   --color-text: #e2e8f0;
   --color-text-secondary: #94a3b8;
@@ -33,6 +34,73 @@ html {
   background-color: var(--color-selection);
 }
 
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow card effect */
+.glow-card {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, transparent 40%, var(--color-accent) 50%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.glow-card:hover::before {
+  opacity: 1;
+}
+
+.glow-card:hover {
+  box-shadow: 0 0 30px var(--color-accent-glow), 0 0 60px var(--color-accent-glow);
+  transform: translateY(-2px);
+}
+
+/* Animated gradient border for featured elements */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), var(--color-accent-light), transparent);
+  background-size: 200% 100%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* Background noise texture */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(ellipse at 50% 0%, #1e3a5f15 0%, transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+}
+
 /* Prose styles for markdown content */
 .prose {
   max-width: 65ch;
@@ -44,11 +112,15 @@ html {
   font-weight: 600;
   margin-top: 2em;
   margin-bottom: 0.75em;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 .prose h1 { font-size: 1.75rem; }
-.prose h2 { font-size: 1.375rem; }
+.prose h2 {
+  font-size: 1.375rem;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--color-border);
+}
 .prose h3 { font-size: 1.125rem; }
 
 .prose p {
@@ -79,7 +151,7 @@ html {
 }
 
 .prose img {
-  border-radius: 8px;
+  border-radius: 12px;
   margin: 1.5em 0;
   border: 1px solid var(--color-border);
 }
@@ -95,7 +167,7 @@ html {
 }
 
 .prose li::marker {
-  color: var(--color-text-muted);
+  color: var(--color-accent);
 }
 
 .prose blockquote {
@@ -104,10 +176,14 @@ html {
   color: var(--color-text-secondary);
   font-style: italic;
   margin: 1.5em 0;
+  background: var(--color-accent-glow);
+  padding: 1em;
+  border-radius: 0 8px 8px 0;
 }
 
 .prose code {
   background: var(--color-surface);
+  border: 1px solid var(--color-border);
   padding: 0.2em 0.4em;
   border-radius: 6px;
   font-size: 0.875em;
@@ -118,7 +194,7 @@ html {
 .prose pre {
   background: var(--color-surface) !important;
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 1.25em;
   overflow-x: auto;
   margin: 1.5em 0;
@@ -126,6 +202,7 @@ html {
 
 .prose pre code {
   background: none;
+  border: none;
   padding: 0;
   color: var(--color-text);
 }
@@ -134,11 +211,13 @@ html {
   width: 100%;
   border-collapse: collapse;
   margin: 1.5em 0;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .prose th, .prose td {
   border: 1px solid var(--color-border);
-  padding: 0.5em 0.75em;
+  padding: 0.625em 0.875em;
   text-align: left;
 }
 
@@ -146,8 +225,42 @@ html {
   background: var(--color-surface);
   color: var(--color-text);
   font-weight: 600;
+  font-size: 0.875em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .prose td {
   color: var(--color-text-secondary);
+}
+
+.prose tr:hover td {
+  background: var(--color-surface);
+}
+
+/* GitHub button */
+.github-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  transition: all 0.2s ease;
+}
+
+.github-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent-light);
+  box-shadow: 0 0 20px var(--color-accent-glow);
+}
+
+.github-btn svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
 }

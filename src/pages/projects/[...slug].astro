@@ -1,6 +1,5 @@
 ---
 import PostLayout from "../../layouts/PostLayout.astro";
-import CodeViewer from "../../components/CodeViewer.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -21,7 +20,7 @@ const { Content } = await render(project);
   date={project.data.date}
   tags={project.data.tags}
   image={project.data.image}
+  github={project.data.github}
 >
   <Content />
-  {project.data.github && <CodeViewer repo={project.data.github} />}
 </PostLayout>

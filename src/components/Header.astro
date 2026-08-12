@@ -8,8 +8,8 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="border-b border-[var(--color-border)]">
-  <nav class="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
+<header class="gradient-border sticky top-0 z-50 backdrop-blur-xl bg-[var(--color-bg)]/80 border-b border-[var(--color-border)]">
+  <nav class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
     <a href="/" class="text-lg font-semibold text-[var(--color-text)] hover:text-[var(--color-accent-light)] transition-colors tracking-tight">
       Dylan Coon
     </a>
@@ -21,9 +21,9 @@ const currentPath = Astro.url.pathname;
             <a
               href={href}
               class:list={[
-                "transition-colors",
+                "transition-colors relative py-1",
                 isActive
-                  ? "text-[var(--color-accent)] font-medium"
+                  ? "text-[var(--color-accent-light)] font-medium"
                   : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]",
               ]}
             >
