@@ -18,26 +18,35 @@ const featuredProjects = allProjects
       <div class="absolute -top-20 -left-20 w-72 h-72 bg-[var(--color-accent)]/8 rounded-full blur-3xl pointer-events-none"></div>
       <div class="absolute top-10 right-0 w-56 h-56 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
-      <p class="text-sm font-medium text-[var(--color-accent)] mb-4 tracking-wide uppercase">Software Engineer</p>
-      <h1 class="text-4xl sm:text-6xl font-bold text-[var(--color-text)] mb-6 tracking-tight leading-[1.1]">
-        Hey, I'm <span class="gradient-text">Dylan</span>.
-      </h1>
-      <p class="text-lg sm:text-xl text-[var(--color-text-secondary)] mb-10 max-w-xl leading-relaxed">
-        I build backend systems, machine learning infrastructure, and tools that solve real problems.
-      </p>
-      <div class="flex gap-4">
-        <a
-          href="/projects"
-          class="px-6 py-3 rounded-lg text-sm font-medium bg-[var(--color-accent)] text-white hover:shadow-[0_0_25px_var(--color-accent-glow)] hover:bg-[var(--color-accent-light)] transition-all"
-        >
-          View Projects
-        </a>
-        <a
-          href="/about"
-          class="px-6 py-3 rounded-lg text-sm font-medium border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent)]/40 hover:text-[var(--color-text)] transition-all"
-        >
-          About Me
-        </a>
+      <div class="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-10">
+        <div>
+          <p class="text-sm font-medium text-[var(--color-accent)] mb-4 tracking-wide uppercase">Software Engineer</p>
+          <h1 class="text-4xl sm:text-6xl font-bold text-[var(--color-text)] mb-6 tracking-tight leading-[1.1]">
+            Hey, I'm <span class="gradient-text">Dylan</span>.
+          </h1>
+          <p class="text-lg sm:text-xl text-[var(--color-text-secondary)] mb-10 max-w-xl leading-relaxed">
+            I build backend systems, machine learning infrastructure, and tools that solve real problems.
+          </p>
+          <div class="flex gap-4">
+            <a
+              href="/projects"
+              class="px-6 py-3 rounded-lg text-sm font-medium bg-[var(--color-accent)] text-white hover:shadow-[0_0_25px_var(--color-accent-glow)] hover:bg-[var(--color-accent-light)] transition-all"
+            >
+              View Projects
+            </a>
+            <a
+              href="/about"
+              class="px-6 py-3 rounded-lg text-sm font-medium border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent)]/40 hover:text-[var(--color-text)] transition-all"
+            >
+              About Me
+            </a>
+          </div>
+        </div>
+        <img
+          src="/profile_image.jpeg"
+          alt="Dylan Coon"
+          class="w-40 h-40 sm:w-52 sm:h-52 rounded-full object-cover border-2 border-[var(--color-border)] shrink-0"
+        />
       </div>
     </section>
 
