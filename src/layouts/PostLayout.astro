@@ -19,17 +19,12 @@ const formattedDate = date.toLocaleDateString("en-US", {
 ---
 
 <BaseLayout title={title} description={description} image={image}>
-  <article class="max-w-3xl mx-auto px-6 py-12">
-    <!-- Breadcrumb as file path -->
-    <p class="text-xs text-[var(--color-punctuation)] mb-6">
-      ~/portfolio/<span class="text-[var(--color-variable)]">{Astro.url.pathname.split("/")[1]}</span>/<span class="text-[var(--color-string)]">{Astro.url.pathname.split("/").pop()}</span>
-    </p>
-
+  <article class="max-w-3xl mx-auto px-6 py-16">
     <header class="mb-10">
-      <p class="text-xs text-[var(--color-number)] mb-3">{formattedDate}</p>
-      <h1 class="text-2xl font-bold text-[var(--color-function)] mb-3">{title}</h1>
-      <p class="text-sm text-[var(--color-comment)] mb-4">
-        <span class="text-[var(--color-punctuation)]">// </span>{description}
+      <p class="text-sm text-[var(--color-text-muted)] mb-3">{formattedDate}</p>
+      <h1 class="text-3xl font-bold text-[var(--color-text)] mb-3 tracking-tight">{title}</h1>
+      <p class="text-[var(--color-text-secondary)] mb-5">
+        {description}
       </p>
       <TagList tags={tags} />
     </header>
@@ -37,7 +32,7 @@ const formattedDate = date.toLocaleDateString("en-US", {
       <img
         src={image}
         alt={title}
-        class="w-full rounded mb-10 border border-[var(--color-border)]"
+        class="w-full rounded-xl mb-10 border border-[var(--color-border)]"
       />
     )}
     <div class="prose">

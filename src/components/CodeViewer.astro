@@ -7,21 +7,21 @@ const { repo } = Astro.props;
 ---
 
 <div
-  class="code-viewer mt-12 rounded border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden"
+  class="code-viewer mt-12 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden"
   data-repo={repo}
 >
   <!-- Header -->
-  <div class="flex items-center justify-between px-4 py-2 border-b border-[var(--color-border)] bg-[var(--color-surface-hover)]">
-    <span class="text-xs text-[var(--color-comment)]">
-      <span class="text-[var(--color-punctuation)]">// </span>source code
+  <div class="flex items-center justify-between px-4 py-2.5 border-b border-[var(--color-border)] bg-[var(--color-surface-hover)]">
+    <span class="text-xs text-[var(--color-text-muted)]">
+      Source Code
     </span>
     <a
       href={`https://github.com/${repo}`}
       target="_blank"
       rel="noopener"
-      class="text-xs text-[var(--color-constant)] hover:underline"
+      class="text-xs text-[var(--color-accent-light)] hover:underline"
     >
-      view on github
+      View on GitHub &rarr;
     </a>
   </div>
 
@@ -29,20 +29,20 @@ const { repo } = Astro.props;
   <div class="flex flex-col md:flex-row" style="min-height: 400px; max-height: 600px;">
     <!-- File tree -->
     <div class="cv-tree md:w-60 shrink-0 border-b md:border-b-0 md:border-r border-[var(--color-border)] overflow-auto p-3 text-xs" style="max-height: 200px; md:max-height: none;">
-      <div class="cv-tree-loading text-[var(--color-punctuation)]">loading file tree...</div>
+      <div class="cv-tree-loading text-[var(--color-text-muted)]">Loading file tree...</div>
       <ul class="cv-tree-root hidden"></ul>
     </div>
 
     <!-- Code panel -->
     <div class="cv-code flex-1 overflow-auto">
-      <div class="cv-code-empty flex items-center justify-center h-full text-xs text-[var(--color-punctuation)] p-8">
-        select a file to view its contents
+      <div class="cv-code-empty flex items-center justify-center h-full text-xs text-[var(--color-text-muted)] p-8">
+        Select a file to view its contents
       </div>
-      <div class="cv-code-loading hidden flex items-center justify-center h-full text-xs text-[var(--color-punctuation)] p-8">
-        loading...
+      <div class="cv-code-loading hidden flex items-center justify-center h-full text-xs text-[var(--color-text-muted)] p-8">
+        Loading...
       </div>
       <div class="cv-code-content hidden"></div>
-      <div class="cv-code-error hidden flex items-center justify-center h-full text-xs text-[var(--color-error)] p-8"></div>
+      <div class="cv-code-error hidden flex items-center justify-center h-full text-xs text-red-400 p-8"></div>
     </div>
   </div>
 </div>
@@ -65,7 +65,7 @@ const { repo } = Astro.props;
   .cv-tree .cv-file > span {
     cursor: pointer;
     padding: 1px 4px;
-    border-radius: 3px;
+    border-radius: 4px;
     transition: background-color 0.1s;
   }
 
@@ -75,16 +75,16 @@ const { repo } = Astro.props;
   }
 
   .cv-tree .cv-folder > span {
-    color: var(--color-keyword);
+    color: var(--color-accent-light);
   }
 
   .cv-tree .cv-file > span {
-    color: var(--color-operator);
+    color: var(--color-text-secondary);
   }
 
   .cv-tree .cv-file.active > span {
-    background-color: var(--color-selection);
-    color: var(--color-variable);
+    background-color: var(--color-accent-muted);
+    color: var(--color-text);
   }
 
   .cv-tree .cv-folder > ul {
@@ -112,7 +112,7 @@ const { repo } = Astro.props;
   .cv-code-path {
     padding: 0.4em 1em;
     font-size: 0.7rem;
-    color: var(--color-punctuation);
+    color: var(--color-text-muted);
     border-bottom: 1px solid var(--color-border);
     background: var(--color-surface-hover);
   }
@@ -301,7 +301,7 @@ const { repo } = Astro.props;
       activeFile = li;
 
       if (isBinary(path)) {
-        showCodeState("error", "binary file — cannot display");
+        showCodeState("error", "Binary file — cannot display");
         return;
       }
 
@@ -313,7 +313,7 @@ const { repo } = Astro.props;
         const data = await res.json();
 
         if (data.size > 100_000) {
-          showCodeState("error", "file too large to display (> 100KB)");
+          showCodeState("error", "File too large to display (> 100KB)");
           return;
         }
 
@@ -324,7 +324,7 @@ const { repo } = Astro.props;
         codeContent.innerHTML = `<div class="cv-code-path">${path}</div>${html}`;
         showCodeState("content");
       } catch (err) {
-        showCodeState("error", `failed to load file: ${err}`);
+        showCodeState("error", `Failed to load file: ${err}`);
       }
     }
 
@@ -344,7 +344,7 @@ const { repo } = Astro.props;
       treeRoot.classList.remove("hidden");
       renderTree(tree, treeRoot, loadFile);
     } catch (err) {
-      treeLoading.textContent = `failed to load: ${err}`;
+      treeLoading.textContent = `Failed to load: ${err}`;
     }
   });
 </script>

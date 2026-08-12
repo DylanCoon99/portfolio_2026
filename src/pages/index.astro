@@ -10,49 +10,44 @@ const featuredProjects = allProjects
   .slice(0, 4);
 ---
 
-<BaseLayout title="Dylan — Software Engineer">
-  <div class="max-w-3xl mx-auto px-6 py-16">
+<BaseLayout title="Dylan Coon — Software Engineer">
+  <div class="max-w-5xl mx-auto px-6 py-20">
     <!-- Hero -->
-    <section class="mb-20">
-      <p class="text-xs text-[var(--color-punctuation)] mb-6">~/portfolio</p>
-      <h1 class="text-3xl font-bold text-[var(--color-function)] mb-4">
-        Hey, I'm Dylan.
+    <section class="mb-24">
+      <h1 class="text-4xl sm:text-5xl font-bold text-[var(--color-text)] mb-5 tracking-tight">
+        Hey, I'm <span class="text-[var(--color-accent)]">Dylan</span>.
       </h1>
-      <p class="text-[var(--color-comment)] mb-2">
-        <span class="text-[var(--color-punctuation)]">// </span>Software engineer who loves building things.
-      </p>
-      <p class="text-sm text-[var(--color-punctuation)] mb-8">
-        Software engineer and electronics hobbyist sharing programming projects
-        and breadboard builds.
+      <p class="text-lg text-[var(--color-text-secondary)] mb-8 max-w-xl leading-relaxed">
+        Software engineer focused on backend systems, machine learning infrastructure, and building tools that solve real problems.
       </p>
       <div class="flex gap-3">
         <a
           href="/projects"
-          class="px-4 py-2 rounded text-sm bg-[var(--color-keyword)]/15 text-[var(--color-keyword)] hover:bg-[var(--color-keyword)]/25 transition-colors"
+          class="px-5 py-2.5 rounded-lg text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-light)] transition-colors"
         >
-          projects
+          View Projects
         </a>
         <a
           href="/about"
-          class="px-4 py-2 rounded text-sm border border-[var(--color-border)] text-[var(--color-punctuation)] hover:border-[var(--color-keyword)] hover:text-[var(--color-keyword)] transition-colors"
+          class="px-5 py-2.5 rounded-lg text-sm font-medium border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text)] transition-colors"
         >
-          about
+          About Me
         </a>
       </div>
     </section>
 
     <!-- Featured Projects -->
     {featuredProjects.length > 0 && (
-      <section class="mb-16">
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-sm text-[var(--color-comment)]">
-            <span class="text-[var(--color-punctuation)]">// </span>featured projects
+      <section>
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-xl font-semibold text-[var(--color-text)]">
+            Featured Projects
           </h2>
-          <a href="/projects" class="text-xs text-[var(--color-constant)] hover:underline">
-            view all
+          <a href="/projects" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-light)] transition-colors">
+            View all &rarr;
           </a>
         </div>
-        <div class="grid sm:grid-cols-2 gap-4">
+        <div class="grid sm:grid-cols-2 gap-5">
           {featuredProjects.map((project) => (
             <ProjectCard
               title={project.data.title}
@@ -65,6 +60,5 @@ const featuredProjects = allProjects
         </div>
       </section>
     )}
-
   </div>
 </BaseLayout>

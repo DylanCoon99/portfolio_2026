@@ -1,19 +1,19 @@
 ---
 const navLinks = [
-  { href: "/", label: "home" },
-  { href: "/projects", label: "projects" },
-  { href: "/about", label: "about" },
+  { href: "/", label: "Home" },
+  { href: "/projects", label: "Projects" },
+  { href: "/about", label: "About" },
 ];
 
 const currentPath = Astro.url.pathname;
 ---
 
 <header class="border-b border-[var(--color-border)]">
-  <nav class="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="/" class="text-[var(--color-function)] font-bold hover:text-[var(--color-variable)] transition-colors">
-      dylan
+  <nav class="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
+    <a href="/" class="text-lg font-semibold text-[var(--color-text)] hover:text-[var(--color-accent-light)] transition-colors tracking-tight">
+      Dylan Coon
     </a>
-    <ul class="flex gap-6 text-sm">
+    <ul class="flex gap-8 text-sm">
       {navLinks.map(({ href, label }) => {
         const isActive = currentPath === href || (href !== "/" && currentPath.startsWith(href));
         return (
@@ -23,8 +23,8 @@ const currentPath = Astro.url.pathname;
               class:list={[
                 "transition-colors",
                 isActive
-                  ? "text-[var(--color-keyword)]"
-                  : "text-[var(--color-punctuation)] hover:text-[var(--color-operator)]",
+                  ? "text-[var(--color-accent)] font-medium"
+                  : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]",
               ]}
             >
               {label}

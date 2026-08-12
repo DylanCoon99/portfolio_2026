@@ -1,20 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import TagList from "../components/TagList.astro";
 ---
 
-<BaseLayout title="About — Dylan" description="About me, my skills, and what I'm working on.">
-  <div class="max-w-3xl mx-auto px-6 py-12">
-    <p class="text-xs text-[var(--color-punctuation)] mb-6">
-      ~/portfolio/<span class="text-[var(--color-string)]">about</span>
+<BaseLayout title="About — Dylan Coon" description="About me, my skills, and what I'm working on.">
+  <div class="max-w-3xl mx-auto px-6 py-16">
+    <h1 class="text-3xl font-bold text-[var(--color-text)] mb-3 tracking-tight">About Me</h1>
+    <p class="text-[var(--color-text-secondary)] mb-12">
+      Software engineer, problem solver, outdoor enthusiast.
     </p>
 
-    <h1 class="text-2xl font-bold text-[var(--color-function)] mb-3">About Me</h1>
-    <p class="text-sm text-[var(--color-comment)] mb-10">
-      <span class="text-[var(--color-punctuation)]">// </span>Software engineer, problem solver, outdoor enthusiast
-    </p>
-
-    <div class="prose mb-12">
+    <div class="prose mb-14">
       <p>
         Hi! My name is Dylan Coon and I am from Erie, Pennsylvania. I'm a software engineer
         with a strong foundation in computer science and a passion for solving complex problems.
@@ -39,12 +34,10 @@ import TagList from "../components/TagList.astro";
       </p>
 
       <p>
-        Outside of work, I'm an electronics hobbyist — I enjoy building things on breadboards
-        and working with microcontrollers. I also love diving into
-        personal programming projects: I've built a CHIP-8 emulator in C++, an in-memory
-        key-value store in Go, and a real-time collaborative editing app with React and
-        WebSockets. These side projects let me explore areas like low-level systems programming
-        and database internals that I find endlessly interesting.
+        Outside of work, I love diving into personal programming projects: I've built a CHIP-8
+        emulator in C++, an in-memory key-value store in Go, and a real-time collaborative
+        editing app with React and WebSockets. These side projects let me explore areas like
+        low-level systems programming and database internals that I find endlessly interesting.
       </p>
 
       <p>
@@ -54,64 +47,51 @@ import TagList from "../components/TagList.astro";
       </p>
     </div>
 
-    <div class="mb-12">
-      <h2 class="text-sm text-[var(--color-comment)] mb-4">
-        <span class="text-[var(--color-punctuation)]">// </span>skills
-      </h2>
-      <div class="space-y-3 text-sm">
-        <div>
-          <span class="text-[var(--color-keyword)]">languages</span>
-          <span class="text-[var(--color-punctuation)]"> — </span>
-          <span class="text-[var(--color-string)]">Go, Python, C, C++, Javascript</span>
+    <div class="mb-14">
+      <h2 class="text-lg font-semibold text-[var(--color-text)] mb-5">Skills</h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+          <p class="text-sm font-medium text-[var(--color-accent-light)] mb-1">Languages</p>
+          <p class="text-sm text-[var(--color-text-secondary)]">Go, Python, C, C++, TypeScript</p>
         </div>
-        <div>
-          <span class="text-[var(--color-keyword)]">cloud</span>
-          <span class="text-[var(--color-punctuation)]"> — </span>
-          <span class="text-[var(--color-string)]">GCP, AWS</span>
+        <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+          <p class="text-sm font-medium text-[var(--color-accent-light)] mb-1">Cloud</p>
+          <p class="text-sm text-[var(--color-text-secondary)]">GCP, AWS</p>
         </div>
-        <div>
-          <span class="text-[var(--color-keyword)]">electronics</span>
-          <span class="text-[var(--color-punctuation)]"> — </span>
-          <span class="text-[var(--color-string)]">Breadboard prototyping</span>
+        <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+          <p class="text-sm font-medium text-[var(--color-accent-light)] mb-1">Interests</p>
+          <p class="text-sm text-[var(--color-text-secondary)]">Backend development, machine learning</p>
         </div>
-        <div>
-          <span class="text-[var(--color-keyword)]">interests</span>
-          <span class="text-[var(--color-punctuation)]"> — </span>
-          <span class="text-[var(--color-string)]">Backend development, machine learning</span>
-        </div>
-        <div>
-          <span class="text-[var(--color-keyword)]">education</span>
-          <span class="text-[var(--color-punctuation)]"> — </span>
-          <span class="text-[var(--color-string)]">Penn State University — B.S. Computer Science, Minor in Mathematics</span>
+        <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+          <p class="text-sm font-medium text-[var(--color-accent-light)] mb-1">Education</p>
+          <p class="text-sm text-[var(--color-text-secondary)]">Penn State University — B.S. Computer Science, Minor in Mathematics</p>
         </div>
       </div>
     </div>
 
-    <div class="mb-12">
-      <h2 class="text-sm text-[var(--color-comment)] mb-4">
-        <span class="text-[var(--color-punctuation)]">// </span>this site
-      </h2>
-      <p class="text-sm text-[var(--color-operator)]">
-        Built with <a href="https://astro.build" class="text-[var(--color-constant)] hover:underline">Astro</a> and
-        <a href="https://tailwindcss.com" class="text-[var(--color-constant)] hover:underline">Tailwind CSS</a>.
+    <div class="mb-14">
+      <h2 class="text-lg font-semibold text-[var(--color-text)] mb-3">This Site</h2>
+      <p class="text-sm text-[var(--color-text-secondary)]">
+        Built with <a href="https://astro.build" class="text-[var(--color-accent-light)] hover:underline">Astro</a> and
+        <a href="https://tailwindcss.com" class="text-[var(--color-accent-light)] hover:underline">Tailwind CSS</a>.
         Deployed on Cloudflare Pages. Content authored in Markdown.
       </p>
     </div>
 
     <div class="flex gap-3">
       <a
-        href="https://github.com"
+        href="https://github.com/DylanCoon99"
         target="_blank"
         rel="noopener"
-        class="px-4 py-2 rounded text-sm border border-[var(--color-border)] text-[var(--color-punctuation)] hover:border-[var(--color-keyword)] hover:text-[var(--color-keyword)] transition-colors"
+        class="px-5 py-2.5 rounded-lg text-sm font-medium border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text)] transition-colors"
       >
-        github
+        GitHub
       </a>
       <a
         href="mailto:hello@example.com"
-        class="px-4 py-2 rounded text-sm border border-[var(--color-border)] text-[var(--color-punctuation)] hover:border-[var(--color-keyword)] hover:text-[var(--color-keyword)] transition-colors"
+        class="px-5 py-2.5 rounded-lg text-sm font-medium border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text)] transition-colors"
       >
-        email
+        Email
       </a>
     </div>
   </div>
