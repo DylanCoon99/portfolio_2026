@@ -75,11 +75,23 @@ const formattedDate = date.toLocaleDateString("en-US", {
       const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
       const images = Array.from(document.querySelectorAll('.screenshot-card img')) as HTMLImageElement[];
       let currentIndex = 0;
+      const prevBtn = document.getElementById('lightbox-prev')!;
+      const nextBtn = document.getElementById('lightbox-next')!;
+
+      function updateArrows() {
+        prevBtn.style.display = currentIndex === 0 ? 'none' : 'flex';
+        nextBtn.style.display = currentIndex === images.length - 1 ? 'none' : 'flex';
+      }
+
+      function show() {
+        lightboxImg.src = images[currentIndex].src;
+        lightboxImg.alt = images[currentIndex].alt;
+        updateArrows();
+      }
 
       function open(index: number) {
         currentIndex = index;
-        lightboxImg.src = images[currentIndex].src;
-        lightboxImg.alt = images[currentIndex].alt;
+        show();
         lightbox.classList.add('active');
         lightbox.setAttribute('aria-hidden', 'false');
       }
@@ -90,15 +102,11 @@ const formattedDate = date.toLocaleDateString("en-US", {
       }
 
       function prev() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        lightboxImg.src = images[currentIndex].src;
-        lightboxImg.alt = images[currentIndex].alt;
+        if (currentIndex > 0) { currentIndex--; show(); }
       }
 
       function next() {
-        currentIndex = (currentIndex + 1) % images.length;
-        lightboxImg.src = images[currentIndex].src;
-        lightboxImg.alt = images[currentIndex].alt;
+        if (currentIndex < images.length - 1) { currentIndex++; show(); }
       }
 
       images.forEach((img, i) => {
