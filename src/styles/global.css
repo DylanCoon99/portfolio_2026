@@ -275,6 +275,37 @@ body::before {
   border-top: 1px solid var(--color-border);
 }
 
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+  padding: 2rem;
+}
+
+.lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease;
+}
+
 /* GitHub button */
 .github-btn {
   display: inline-flex;

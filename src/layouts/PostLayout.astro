@@ -60,4 +60,39 @@ const formattedDate = date.toLocaleDateString("en-US", {
       <slot />
     </div>
   </article>
+
+  <!-- Lightbox overlay -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <script>
+    function initLightbox() {
+      const lightbox = document.getElementById('lightbox')!;
+      const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+
+      document.querySelectorAll('.screenshot-card img').forEach((img) => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+          lightboxImg.src = (img as HTMLImageElement).src;
+          lightboxImg.alt = (img as HTMLImageElement).alt;
+          lightbox.classList.add('active');
+          lightbox.setAttribute('aria-hidden', 'false');
+        });
+      });
+
+      lightbox.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+          lightbox.classList.remove('active');
+          lightbox.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }
+    initLightbox();
+  </script>
 </BaseLayout>
