@@ -222,6 +222,59 @@ body::before {
   background: var(--color-surface);
 }
 
+/* Screenshot grid */
+.screenshot-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 2em 0;
+}
+
+@media (min-width: 640px) {
+  .screenshot-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.screenshot-card {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.screenshot-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, #3b82f612 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.screenshot-card:hover {
+  border-color: var(--color-border-hover);
+}
+
+.screenshot-card img {
+  width: 100%;
+  display: block;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.screenshot-card p {
+  padding: 0.75em 1em;
+  margin: 0 !important;
+  font-size: 0.875rem;
+  color: var(--color-text-muted) !important;
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+}
+
 /* GitHub button */
 .github-btn {
   display: inline-flex;

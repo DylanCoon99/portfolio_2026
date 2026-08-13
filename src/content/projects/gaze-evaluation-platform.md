@@ -37,6 +37,27 @@ Every pull request to `main` triggers a GitHub Actions workflow that builds the 
 
 A FastAPI service reads from MLflow and serves an interactive dashboard with a models overview, sortable run history, per-model detail pages, and a Pareto plot comparing any two metrics with Pareto-optimal models highlighted.
 
+## Screenshots
+
+<div class="screenshot-grid">
+  <div class="screenshot-card">
+    <img src="/sc/models-overview.png" alt="Models Overview — best run per model with key metrics" />
+    <p>Models Overview</p>
+  </div>
+  <div class="screenshot-card">
+    <img src="/sc/model-detail.png" alt="Model Detail — per-model run history and metric trends" />
+    <p>Model Detail</p>
+  </div>
+  <div class="screenshot-card">
+    <img src="/sc/pareto-plot.png" alt="Pareto Frontier — accuracy vs latency trade-off plot" />
+    <p>Pareto Frontier</p>
+  </div>
+  <div class="screenshot-card">
+    <img src="/sc/all-runs.png" alt="All Runs — every evaluation run with full metrics" />
+    <p>All Runs</p>
+  </div>
+</div>
+
 ## Tech Stack
 
 **Language:** Python
