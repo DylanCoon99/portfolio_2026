@@ -63,34 +63,62 @@ const formattedDate = date.toLocaleDateString("en-US", {
 
   <!-- Lightbox overlay -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button id="lightbox-close" class="lightbox-close" aria-label="Close">&times;</button>
+    <button id="lightbox-prev" class="lightbox-arrow lightbox-prev" aria-label="Previous">&#8249;</button>
     <img id="lightbox-img" src="" alt="" />
+    <button id="lightbox-next" class="lightbox-arrow lightbox-next" aria-label="Next">&#8250;</button>
   </div>
 
   <script>
     function initLightbox() {
       const lightbox = document.getElementById('lightbox')!;
       const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+      const images = Array.from(document.querySelectorAll('.screenshot-card img')) as HTMLImageElement[];
+      let currentIndex = 0;
 
-      document.querySelectorAll('.screenshot-card img').forEach((img) => {
-        img.style.cursor = 'pointer';
-        img.addEventListener('click', () => {
-          lightboxImg.src = (img as HTMLImageElement).src;
-          lightboxImg.alt = (img as HTMLImageElement).alt;
-          lightbox.classList.add('active');
-          lightbox.setAttribute('aria-hidden', 'false');
-        });
-      });
+      function open(index: number) {
+        currentIndex = index;
+        lightboxImg.src = images[currentIndex].src;
+        lightboxImg.alt = images[currentIndex].alt;
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+      }
 
-      lightbox.addEventListener('click', () => {
+      function close() {
         lightbox.classList.remove('active');
         lightbox.setAttribute('aria-hidden', 'true');
+      }
+
+      function prev() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        lightboxImg.src = images[currentIndex].src;
+        lightboxImg.alt = images[currentIndex].alt;
+      }
+
+      function next() {
+        currentIndex = (currentIndex + 1) % images.length;
+        lightboxImg.src = images[currentIndex].src;
+        lightboxImg.alt = images[currentIndex].alt;
+      }
+
+      images.forEach((img, i) => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => open(i));
+      });
+
+      document.getElementById('lightbox-close')!.addEventListener('click', close);
+      document.getElementById('lightbox-prev')!.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
+      document.getElementById('lightbox-next')!.addEventListener('click', (e) => { e.stopPropagation(); next(); });
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) close();
       });
 
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-          lightbox.classList.remove('active');
-          lightbox.setAttribute('aria-hidden', 'true');
-        }
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
       });
     }
     initLightbox();
