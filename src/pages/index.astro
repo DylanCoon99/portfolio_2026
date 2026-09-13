@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import HobbyCard from "../components/HobbyCard.astro";
 import { getCollection } from "astro:content";
 
 const allProjects = await getCollection("projects");
@@ -8,6 +9,9 @@ const featuredProjects = allProjects
   .filter((p) => p.data.featured)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 4);
+
+const hobbyProjects = (await getCollection("hobby"))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <BaseLayout title="Dylan Coon — Software Engineer">
@@ -75,6 +79,27 @@ const featuredProjects = allProjects
               tags={project.data.tags}
               slug={project.id}
               image={project.data.image}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Hobby Projects -->
+    {hobbyProjects.length > 0 && (
+      <section class="pb-20">
+        <div class="h-px bg-gradient-to-r from-transparent via-[var(--color-accent)]/30 to-transparent mb-16"></div>
+        <h2 class="text-2xl font-semibold text-[var(--color-text)] tracking-tight mb-10">
+          Hobby Projects
+        </h2>
+        <div class="grid sm:grid-cols-2 gap-5">
+          {hobbyProjects.map((project) => (
+            <HobbyCard
+              title={project.data.title}
+              description={project.data.description}
+              tags={project.data.tags}
+              github={project.data.github}
+              status={project.data.status}
             />
           ))}
         </div>

@@ -14,4 +14,16 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { projects };
+const hobby = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/hobby" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.coerce.date(),
+    tags: z.array(z.string()),
+    github: z.string().optional(),
+    status: z.enum(["completed", "in-progress"]).default("completed"),
+  }),
+});
+
+export const collections = { projects, hobby };
