@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HobbyCard from "../../components/HobbyCard.astro";
+import { getCollection } from "astro:content";
+
+const hobbyProjects = (await getCollection("hobby")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+
+<BaseLayout title="Hobby Projects — Dylan Coon" description="Robotics, electronics, and hands-on hardware builds.">
+  <section class="max-w-5xl mx-auto px-6 py-16 relative">
+    <!-- Background accent -->
+    <div class="absolute -top-10 right-0 w-64 h-64 bg-[var(--color-accent)]/5 rounded-full blur-3xl pointer-events-none"></div>
+
+    <h1 class="text-3xl sm:text-4xl font-bold mb-4 tracking-tight">Hobby Projects</h1>
+    <p class="text-[var(--color-text-secondary)] mb-6 max-w-2xl">
+      Robotics, electronics, and hands-on hardware builds.
+    </p>
+
+    <!-- Divider -->
+    <div class="h-px bg-gradient-to-r from-[var(--color-accent)]/30 via-[var(--color-border)] to-transparent mb-10"></div>
+
+    <div class="grid sm:grid-cols-2 gap-5">
+      {hobbyProjects.map((project) => (
+        <HobbyCard
+          title={project.data.title}
+          description={project.data.description}
+          tags={project.data.tags}
+          github={project.data.github}
+          status={project.data.status}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
