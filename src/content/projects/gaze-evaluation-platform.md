@@ -3,6 +3,7 @@ title: "Gaze Evaluation Platform"
 description: "Evaluation infrastructure for driver-monitoring gaze models with automated regression gating, MLflow tracking, and a Pareto frontier dashboard."
 date: 2026-08-01
 tags: ["python", "mlflow", "docker", "fastapi", "github-actions", "dvc", "machine-learning"]
+image: "/sc/pareto-plot.png"
 github: "DylanCoon99/gaze_detection"
 featured: true
 ---

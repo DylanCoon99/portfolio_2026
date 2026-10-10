@@ -3,6 +3,7 @@ title: "CHIP-8 Emulator"
 description: "Fully functional CHIP-8 virtual machine emulator written in modern C++."
 date: 2025-09-15
 tags: ["c++", "emulation", "low-level"]
+image: "/sc/chip8/ibm-logo.png"
 github: "DylanCoon99/chip_emulator"
 featured: true
 ---
