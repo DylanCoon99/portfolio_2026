@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import HobbyCard from "../components/HobbyCard.astro";
+import ResumeButton from "../components/ResumeButton.astro";
 import { getCollection } from "astro:content";
 
 const allProjects = await getCollection("projects");
@@ -31,7 +32,7 @@ const hobbyProjects = (await getCollection("hobby"))
           <p class="text-lg sm:text-xl text-[var(--color-text-secondary)] mb-10 max-w-xl leading-relaxed">
             I build backend systems, machine learning infrastructure, and tools that solve real problems.
           </p>
-          <div class="flex gap-4">
+          <div class="flex flex-wrap gap-4">
             <a
               href="/projects"
               class="px-6 py-3 rounded-lg text-sm font-medium bg-[var(--color-accent)] text-white hover:shadow-[0_0_25px_var(--color-accent-glow)] hover:bg-[var(--color-accent-light)] transition-all"
@@ -44,6 +45,7 @@ const hobbyProjects = (await getCollection("hobby"))
             >
               About Me
             </a>
+            <ResumeButton />
           </div>
         </div>
         <div class="relative shrink-0">
