@@ -1,6 +1,6 @@
 ---
 title: "Real-Time Object Detection Pipeline"
-description: "Self-hosted real-time video analytics system running YOLOv8 inference in C++ on a Raspberry Pi 5, with Kafka streaming, a FastAPI backend, and a React dashboard."
+description: "Real-time video analytics system built for a Raspberry Pi 5, with YOLOv8 inference in C++, Kafka streaming, a FastAPI backend, and a React dashboard."
 date: 2026-07-01
 tags: ["c++", "python", "typescript", "yolov8", "kafka", "react", "docker", "raspberry-pi"]
 github: "DylanCoon99/realtime-detection-pipeline"
@@ -8,7 +8,7 @@ featured: true
 order: 2
 ---
 
-A self-hosted real-time video analytics system running on a Raspberry Pi 5 (8GB). Runs YOLOv8 inference in C++ via ONNX Runtime, streams detection events through Apache Kafka, processes data with Python batch aggregation, and serves a live dashboard via React.
+A real-time video analytics system built to self-host on a Raspberry Pi 5 (8GB). Runs YOLOv8 inference in C++ via ONNX Runtime, streams detection events through Apache Kafka, processes data with Python batch aggregation, and serves a live dashboard via React.
 
 ## Architecture
 
@@ -35,7 +35,7 @@ The API reads from both Redis (real-time) and PostgreSQL (historical) to serve t
 
 ## Infrastructure
 
-The full stack runs in Docker Compose with Apache Kafka for event streaming, PostgreSQL for historical storage, Redis for real-time caching, Caddy as a reverse proxy with automatic SSL, and Prometheus/Grafana for monitoring and alerting. CI/CD is handled by GitHub Actions, which builds ARM64 Docker images on push to `main`, pushes to GitHub Container Registry, and triggers a deploy via webhook to the Pi.
+The full stack runs in Docker Compose with Apache Kafka for event streaming, PostgreSQL for historical storage, and Redis for real-time caching. Kafka and PostgreSQL have health checks, and the services that depend on them wait until they report healthy before starting. Every container restarts automatically if it exits.
 
 ## Tech Stack
 
@@ -45,7 +45,7 @@ The full stack runs in Docker Compose with Apache Kafka for event streaming, Pos
 **Backend:** FastAPI
 **Frontend:** React, TypeScript
 **Databases:** PostgreSQL, Redis
-**Infrastructure:** Docker, Docker Compose, GitHub Actions, Prometheus, Grafana, Caddy
+**Infrastructure:** Docker, Docker Compose
 **Build:** CMake, Google Test
 
 ## Links
