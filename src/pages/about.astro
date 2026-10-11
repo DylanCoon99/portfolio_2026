@@ -22,9 +22,10 @@ import ResumeButton from "../components/ResumeButton.astro";
         with a strong foundation in computer science and a passion for solving complex problems.
         I graduated from Penn State University with a degree in Computer Science and a minor in
         Mathematics, where I built a deep understanding of algorithms, systems, and logical
-        thinking — skills I apply daily in my work and personal projects. I am proficient in
-        Go, Python, C and familiar with Javascript. I have worked with GCP quite a bit as well
-        as AWS on occasion. I am always eager to learn new languages and tools.
+        thinking — skills I apply daily in my work and personal projects. I work mostly in
+        Python, Go, C++, and C, and I'm familiar with JavaScript and TypeScript. I have worked
+        with GCP quite a bit as well as AWS on occasion. I am always eager to learn new
+        languages and tools.
       </p>
 
       <p>
@@ -33,26 +34,34 @@ import ResumeButton from "../components/ResumeButton.astro";
         an intern, I worked on a ML team that specialized in model optimization and refactoring
         for intelligent document processing. I wrote Python code to extract signatures from
         documents and structure training data in a concurrent manner using a threading library.
-        Currently, I'm a software engineer at the company, where I work on an application
-        support team. I spend most of my time leveraging my Python skills to automate workflows,
-        gather metrics, and monitor cloud environments. I also help validate new releases in
-        production. I enjoy working with data, writing clean APIs, and diving into technical
-        challenges. My main interests lie in backend development and machine learning.
+        Today I'm a software engineer at the company on an application support team, where
+        much of my work is reliability engineering: I monitor our cloud environments on GCP,
+        collect metrics on system health, build Python automation that replaces manual
+        operational work, and validate new releases in production. That work is what pulled me
+        toward infrastructure and SRE, and it's where I want to keep growing.
       </p>
 
       <p>
-        Outside of work, I love diving into personal programming projects: I've built a CHIP-8
-        emulator in C++, an in-memory key-value store in Go, and a real-time collaborative
-        editing app with React and WebSockets. These side projects let me explore areas like
-        low-level systems programming and database internals that I find endlessly interesting.
+        Outside of work, my projects focus on running ML systems reliably. I built an
+        <a href="/projects/gaze-evaluation-platform">evaluation platform for gaze models</a>
+        where every model is evaluated in a container, logged to MLflow, and gated in CI, so a
+        merge is blocked if any metric regresses. I also built a
+        <a href="/projects/realtime-detection-pipeline">real-time object detection pipeline</a>
+        on a Raspberry Pi 5: YOLOv8 inference in C++, detection events streamed through Kafka,
+        live data in Redis, history in PostgreSQL, and a React dashboard on top. Earlier
+        projects like a CHIP-8 emulator in C++ and a key-value store in Go are where I got
+        comfortable with systems programming.
       </p>
 
       <p>
-        I'm also into robotics and electronics as a hobby. I built an auto-tracking camera
-        gimbal using a Raspberry Pi and OpenCV, and I'm currently working on a 3-axis robotic
-        arm with stepper motors and 3D-printed links — implementing forward and inverse
-        kinematics from scratch. I enjoy the overlap between software and hardware, especially
-        when it involves control systems and real-time feedback loops.
+        I'm also into robotics, and lately drones. I built an auto-tracking camera gimbal using
+        a Raspberry Pi and OpenCV, and I'm currently working on a 3-axis robotic arm with
+        stepper motors and 3D-printed links — implementing forward and inverse kinematics from
+        scratch. My newest track is drone autonomy:
+        <a href="/projects/gridplan">Gridplan</a>, a C++/Python path-planning library, is the
+        first piece, with trajectory generation and real-time replanning to follow. I enjoy the
+        overlap between software and hardware, especially when it involves control systems and
+        real-time feedback loops.
       </p>
 
       <p>
@@ -67,15 +76,19 @@ import ResumeButton from "../components/ResumeButton.astro";
       <div class="grid sm:grid-cols-2 gap-4">
         <div class="glow-card rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
           <p class="text-sm font-medium text-[var(--color-accent-light)] mb-1.5">Languages</p>
-          <p class="text-sm text-[var(--color-text-secondary)]">Python, C++, Go, C</p>
+          <p class="text-sm text-[var(--color-text-secondary)]">Python, Go, C++, C</p>
         </div>
         <div class="glow-card rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
           <p class="text-sm font-medium text-[var(--color-accent-light)] mb-1.5">Cloud</p>
           <p class="text-sm text-[var(--color-text-secondary)]">GCP, AWS</p>
         </div>
+        <div class="glow-card rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 sm:col-span-2">
+          <p class="text-sm font-medium text-[var(--color-accent-light)] mb-1.5">Infrastructure &amp; Tooling</p>
+          <p class="text-sm text-[var(--color-text-secondary)]">Docker, GitHub Actions, Kafka, Redis, PostgreSQL, MLflow, DVC, FastAPI, ONNX Runtime</p>
+        </div>
         <div class="glow-card rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
           <p class="text-sm font-medium text-[var(--color-accent-light)] mb-1.5">Interests</p>
-          <p class="text-sm text-[var(--color-text-secondary)]">Backend development, machine learning, SRE, data engineering</p>
+          <p class="text-sm text-[var(--color-text-secondary)]">Infrastructure, SRE, DevOps, ML systems, robotics and autonomy</p>
         </div>
         <div class="glow-card rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
           <p class="text-sm font-medium text-[var(--color-accent-light)] mb-1.5">Education</p>

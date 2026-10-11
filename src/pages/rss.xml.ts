@@ -9,7 +9,7 @@ export async function GET(context: APIContext) {
 
   return rss({
     title: "Dylan Coon — Projects",
-    description: "Software engineering and machine learning projects by Dylan Coon.",
+    description: "Infrastructure, SRE, and machine learning projects by Dylan Coon.",
     site: context.site!,
     items: projects.map((project) => ({
       title: project.data.title,

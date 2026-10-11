@@ -11,6 +11,8 @@ const projects = defineCollection({
     image: z.string().optional(),
     github: z.string().optional(),
     featured: z.boolean().default(false),
+    // Position on the home page among featured projects (lower comes first)
+    order: z.number().optional(),
   }),
 });
 

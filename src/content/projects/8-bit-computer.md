@@ -4,7 +4,7 @@ description: "Custom assembler that compiles assembly source code into binary RO
 date: 2025-06-01
 tags: ["python", "assembly", "low-level", "hardware"]
 github: "DylanCoon99/assembler"
-featured: true
+featured: false
 ---
 
 An assembler for a custom 8-bit breadboard computer. Takes assembly source code and produces binary ROM images that can be flashed to AT28C256 EEPROMs using a TL866II+ programmer.

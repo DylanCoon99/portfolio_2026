@@ -6,6 +6,7 @@ tags: ["c++", "emulation", "low-level"]
 image: "/sc/chip8/ibm-logo.png"
 github: "DylanCoon99/chip_emulator"
 featured: true
+order: 4
 ---
 
 A fully functional CHIP-8 emulator written in modern C++. Accurately replicates the original CHIP-8 virtual machine, implementing instruction decoding, memory management, input handling, and graphics rendering.

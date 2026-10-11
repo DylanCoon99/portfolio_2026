@@ -6,6 +6,7 @@ tags: ["python", "mlflow", "docker", "fastapi", "github-actions", "dvc", "machin
 image: "/sc/pareto-plot.png"
 github: "DylanCoon99/gaze_detection"
 featured: true
+order: 1
 ---
 
 Evaluation infrastructure for driver-monitoring gaze models: a system that answers **"which model should we ship, and how do we know?"** automatically and repeatedly.

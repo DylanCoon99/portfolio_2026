@@ -4,7 +4,7 @@ description: "Desktop application for designing and simulating digital logic cir
 date: 2026-05-01
 tags: ["c++", "qt", "simulation", "desktop"]
 github: "DylanCoon99/LogicForge"
-featured: true
+featured: false
 ---
 
 A desktop application for designing and simulating digital logic circuits. Built for engineers, students, and hobbyists who want to prototype and verify digital designs before breadboarding.

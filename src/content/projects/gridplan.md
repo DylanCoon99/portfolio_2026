@@ -6,6 +6,7 @@ tags: ["c++", "python", "pybind11", "algorithms", "robotics", "benchmarking"]
 image: "/sc/gridplan/comparison.png"
 github: "DylanCoon99/autonomy_planning"
 featured: true
+order: 3
 ---
 
 A hybrid C++20/Python path-planning library implementing BFS, Dijkstra, A*, and weighted A* on 2D and 3D occupancy grids. It's the first piece of a drone autonomy project track, providing the search foundation for later trajectory generation and incremental replanning work.

@@ -8,7 +8,11 @@ import { getCollection } from "astro:content";
 const allProjects = await getCollection("projects");
 const featuredProjects = allProjects
   .filter((p) => p.data.featured)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .sort(
+    (a, b) =>
+      (a.data.order ?? Infinity) - (b.data.order ?? Infinity) ||
+      b.data.date.getTime() - a.data.date.getTime()
+  )
   .slice(0, 4);
 
 const hobbyProjects = (await getCollection("hobby"))
@@ -30,7 +34,7 @@ const hobbyProjects = (await getCollection("hobby"))
             Hey, I'm <span class="gradient-text">Dylan</span>.
           </h1>
           <p class="text-lg sm:text-xl text-[var(--color-text-secondary)] mb-10 max-w-xl leading-relaxed">
-            I build backend systems, machine learning infrastructure, and tools that solve real problems.
+            I build reliable infrastructure for ML systems: evaluation pipelines, streaming services, and the CI/CD that keeps them honest.
           </p>
           <div class="flex flex-wrap gap-4">
             <a

@@ -4,7 +4,7 @@ description: "Real-time document editing app with permission-based sharing, buil
 date: 2025-06-15
 tags: ["react", "go", "websockets", "full-stack"]
 github: "DylanCoon99/collab-editing-app"
-featured: true
+featured: false
 ---
 
 A real-time document editing app enabling multiple users to collaborate seamlessly with permission-based sharing.
