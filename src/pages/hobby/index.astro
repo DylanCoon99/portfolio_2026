@@ -8,14 +8,19 @@ const hobbyProjects = (await getCollection("hobby")).sort(
 );
 ---
 
-<BaseLayout title="Hobby Projects — Dylan Coon" description="Robotics, electronics, and hands-on hardware builds.">
+<BaseLayout title="Hobby Projects — Dylan Coon" description="Robotics, drones, electronics, and hands-on hardware builds.">
   <section class="max-w-5xl mx-auto px-6 py-16 relative">
     <!-- Background accent -->
     <div class="absolute -top-10 right-0 w-64 h-64 bg-[var(--color-accent)]/5 rounded-full blur-3xl pointer-events-none"></div>
 
     <h1 class="text-3xl sm:text-4xl font-bold mb-4 tracking-tight">Hobby Projects</h1>
-    <p class="text-[var(--color-text-secondary)] mb-6 max-w-2xl">
-      Robotics, electronics, and hands-on hardware builds.
+    <p class="text-[var(--color-text-secondary)] mb-3 max-w-2xl">
+      Robotics, drones, electronics, and hands-on hardware builds.
+    </p>
+    <p class="text-sm text-[var(--color-text-muted)] mb-6 max-w-2xl">
+      I'm currently working toward drone autonomy. The first piece is
+      <a href="/projects/gridplan" class="text-[var(--color-accent-light)] hover:underline">Gridplan</a>,
+      a path-planning library for 2D and 3D occupancy grids.
     </p>
 
     <!-- Divider -->
@@ -27,6 +32,7 @@ const hobbyProjects = (await getCollection("hobby")).sort(
           title={project.data.title}
           description={project.data.description}
           tags={project.data.tags}
+          image={project.data.image}
           github={project.data.github}
           status={project.data.status}
         />
